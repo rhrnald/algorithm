@@ -1,23 +1,3 @@
-#include <stdio.h>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <queue>
-#include <cmath>
-#include <string>
-#include <cstring>
-
-#define sz(v) ((int)((v).size()))
-#define all(v) (v).begin(), (v).end()
-
-using namespace std;
-
-typedef long long ll;
-typedef pair<int,int> pii;
-
-const int INF = 0x3c3c3c3c;
-const ll LINF = 1ll*INF*INF*2;
-
 class SegTree {
 	public:
 	vector<int> tree;
@@ -65,25 +45,3 @@ class SegTree {
 		printf("\n");
 	}
 };
-
-const int N = 1001;
-int n;
-int input[N];
-vector<pii> v;
-
-int main(void) {
-	scanf("%d", &n);
-	for(int i=0; i<n; i++) scanf("%d", input+i);
-	for(int i=0; i<n; i++) v.push_back(make_pair(input[i], -i));
-	sort(all(v));// ->	sort(v.begin(), v.end());랑 같음 위에 #define all(v) (v).begin(), (v).end()
-
-	SegTree sg = SegTree(n);
-
-	for(int i=0; i<n; i++) {
-		int pos = -v[i].second;
-		int temp;
-		temp=sg.getVal(0, pos-1)+1;
-		sg.insert(pos, temp);
-	}
-	printf("%d", sg.getVal(0, n-1));
-}
