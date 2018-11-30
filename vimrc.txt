@@ -1,0 +1,57 @@
+set nu ai si ts=4 sw=4
+set hlsearch
+set ignorecase
+syntax on
+
+set mouse+=an
+set ttymouse=xterm2
+
+"colorscheme monokai
+"colorscheme darkblue
+
+au BufReadPost *
+\ if line ("'\'") > 0 && line ("'\'") <= line("$") |
+\ exe "norm g'\"" | endif
+
+set laststatus=2
+set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
+
+set nocompatible
+set backspace=indent,eol,start
+set autoread
+map run :wa<CR>:!clear && g++ -O2 -std=c++14 % -o make && ./make < input.txt > output.txt<CR>
+map pyrun :wa<CR>:!clear && python % < input.txt > output.txt<CR>
+nmap <C-F5> :wa<CR>:!clear && g++ -O2 -std=c++14 % -o make && ./make < input.txt > output.txt<CR>
+imap <C-F5> <ESC><C-F5>
+map submit :w<CR> :!clear && python3 onlysubmit.py % <CR>
+map base :!cp base.cpp % <CR>
+map setting :bo 50vs output.txt <CR>:split input.txt <CR> :w<CR>
+nmap <C-p> :wa<CR>setting
+imap <C-p> <ESC><C-p>
+
+"<C-w>60< :w<CR> <C-w>h
+map save :wqa<CR>
+
+"map test :w<CR> :!make clean && make && ./btest && ./dlc % <CR>
+map <C-Up> <C-w>k
+map <C-Down> <C-w>j
+map <C-Left> <C-w>h
+map <C-Right> <C-w>l
+
+map <C-n> <C-e>
+map <C-m> <C-y>
+
+
+if &term =~ '^screen'
+" tmux will send xterm-style keys when its xterm-keys option is on
+execute "set <xUp>=\e[1;*A"
+execute "set <xDown>=\e[1;*B"
+execute "set <xRight>=\e[1;*C"
+execute "set <xLeft>=\e[1;*D"
+endif
+
+nmap <C-a> ggVG
+imap <C-a> <ESC><C-a>
+vmap <C-c> "+y
+nmap <C-v> "+p
+imap <C-v> <ESC><C-v>
