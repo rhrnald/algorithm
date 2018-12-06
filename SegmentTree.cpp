@@ -13,7 +13,7 @@ class SegTree {
 		tree = vector<int>(K+K, 0);
 	}
 
-	void insert(int pos, int val) { //pos = 0~n-1
+	void insert(int pos, int val) { //pos = 0~n-1 //O(log n)
 		pos+=K;
 		tree[pos] = val;
 		pos/=2;
@@ -23,7 +23,7 @@ class SegTree {
 		}
 	}
 
-	int getVal(int x, int y) {//x,y = 0~n-1
+	int getVal(int x, int y) {//x,y = 0~n-1 //O(log n)
 		if(y<x) return 0;
 		x+=K; y+=K;
 		int xVal = tree[x];

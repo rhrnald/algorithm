@@ -1,3 +1,9 @@
+using namespace std;
+
+typedef pair<int,int> pii;
+
+const int INF = 0x3c3c3c3c;
+
 class Graph{
 public:
 	struct E {int to, w;};
@@ -13,7 +19,7 @@ public:
 		G[x].push_back({y, wt});
 		//G[y].push_back({x, wt});
 	}
-	vector<int> Dijkstra(int from) {
+	vector<int> Dijkstra(int from) {//O(E + V log V)
 		vector<int> ans = vector<int>(n, INF);
 		vector<bool> vst = vector<bool>(n, false);
 		ans[from] = 0;
@@ -37,7 +43,7 @@ public:
 		return ans;
 	}
 	
-	vector<int> BellmanFord(int from) {
+	vector<int> BellmanFord(int from) {//negative edge OK // O(VE)
 		vector<int> ans = vector<int>(n, INF);
 		ans[from] = 0;
 
@@ -50,5 +56,20 @@ public:
 		}
 
 		return ans;
+	}
+	vector<vector<int>> Floyd_Warshall() {//O(V^3)
+		vector<vector<int>> ret = vector<vector<int>>(n, vector<int>(n, INF));
+		for(int i=0; i<n; i++)
+			for(int j=0; j<G[i].size(); j++) {
+				ret[i][G[i][j].to] = G[i][j].w; //if path from x to y is single
+			}
+		for(int i=0; i<n; i++) ret[i][i] = 0;
+
+		for(int k=0; k<n; k++)
+			for(int i=0; i<n; i++)
+				for(int j=0; j<n; j++) {
+					ret[i][j] = min(ret[i][j], ret[i][k]+ret[k][j]);
+				}
+		return ret;
 	}
 };

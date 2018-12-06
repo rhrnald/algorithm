@@ -5,14 +5,14 @@ class PanwickTree {
 		v = vector<int>(n+1, 0);
 	}
 
-	void insert(int pos, int val) {//pos = 1~n
+	void insert(int pos, int val) {//pos = 1~n //O(log n)
 		while(pos<=n) {
 			v[pos]+=val;
 			pos+=pos&(-pos);
 		}
 	}
 
-	int sum(int pos) {
+	int sum(int pos) {//O(log n)
 		int ret=0;
 		while(pos) {
 			ret+=v[pos];
