@@ -12,7 +12,7 @@ public:
 
 	Graph(int x) {
 		G.resize(x);
-		n = x;
+		n=x;
 	}
 
 	void connect(int x, int y, int wt) {
