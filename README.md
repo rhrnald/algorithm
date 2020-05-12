@@ -2,7 +2,7 @@
 Hi! My name is Chaewon Kim.
 Hi! My name is Jeongwoo OH.
 
-|
+.
 +-- _config.yml
 +-- _drafts
 |   +-- begin-with-the-crazy-ideas.textile
